@@ -1,0 +1,116 @@
+.main_page{
+    margin-top: 225px;
+    margin-left: 300px;
+}
+.headline{
+    position: flex;
+    z-index: 1;
+    background-size:cover;
+    background: black; 
+    border-radius: 10px;
+    padding: 2.5px;
+    font-size: 40px;
+    width: 160px;
+    height: 60px;
+    margin-left: 155px;
+}
+.x{
+    position: relative;
+    color: rgb(0, 255, 42);
+    left: 15px;
+    top: 5px;
+}
+.linkS{
+    position: relative;
+    color: white;
+    left: 15px;
+    top: 5px;
+}
+.word_head{
+    position: relative;
+    font-size: 5px; 
+    left: 495px;
+    top: 10px;
+    width: 250px;
+    display: flex;
+}
+.name{
+    margin-left: 160px;
+    font-size: 35px;
+}
+.word{
+    margin-top: 0px;
+    margin-left: 0px;
+    font-size: 15px;
+}
+.word-2{
+    margin-top: 0px;
+    margin-left: 0px;
+    font-size: 15px; 
+
+}
+.forms{
+    width:400px;
+}
+.name1{
+    width: 550px;
+    margin-left: -20px;
+    font-size: 20px;
+}
+.name{
+    width: 400px;
+    margin-left: 160px;
+    border-radius: 10px;
+}
+.mail{
+    width: 260px; 
+    height: 30px;
+    border-radius: 10px;
+}
+.pass{
+    width: 260px;
+    height: 30px;
+    border-radius: 10px;
+}
+.data{
+    width: 80px;
+    height: 30px;
+    border-radius: 10px;
+}
+.mouth{
+    width: 80px;
+    height: 30px;
+    border-radius: 10px;
+}
+.day{
+    width: 80px;
+    height: 30px;
+    border-radius: 10px;
+}
+.create{
+    margin:10px;
+    margin-left: 0px;
+    font-size: 20px;
+    text-decoration: none;
+}
+.create_button{
+    /* color: rgb(0, 0, 0); */
+    color: rgb(0, 255, 42);
+    /* background: yellow; */
+    background: black;
+    border-radius: 10px;
+    border:solid 2px rgb(255, 255, 255);;
+    margin-left: 11px;
+    width: 214px;
+    height: 48px;
+}
+.form.as_p{
+    position: absolute;
+    border:solid 2px rgb(0,0,0);;
+    border-radius: 10px;
+    width: 400px;
+    height: 550px;
+}
+.words{
+    color: grey;
+}

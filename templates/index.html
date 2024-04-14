@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        {%load static%}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"> 
+        {% comment %} <link rel='icon' href="{% static 'icon/favicon.ico' %}">  {% endcomment %}
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <title>X.LiNK</title>
+    </head>
+    <body  class="container py-5">
+        <nav class="main_page">
+            <div>
+                <div class="header">
+                    <h1>
+                        <div class="head">
+                            <div>
+                                <div class="headline" onclick="clickBtn()"> 
+                                   <b class="x">X.</b><b class="linkS">LiNK</b>
+                                </div>
+                            </div>
+                        </div>
+                    </h1>
+                </div>
+            </div>
+            <div>
+                <div class="frame">
+                    <div>
+                        <div class="name">
+                            <b>ようこそ</b>
+                        </div>
+                        <div class="name1">
+                            <b>X.LINKはコミュニティー同士を繋げるオンライン名簿です。</b>
+                        </div>
+                        <div class="forms">
+                            <table class="reg_form">
+                                <form class="forms" action=""  enctype="multipart/form-data" method="post">
+                                    {% csrf_token %}
+                                    <tr>
+                                        <td style="margin-left: 0px; display: flex;">
+                                            <br>
+                                            <a href="{% url 'account_login' %}" class="create"><button class="create_button" type="button"><b>Log in</b></button></a>
+                                            <a href="{% url 'account_signup' %}" class="create"><button class="create_button"  type="button"><b>Sign up</b></button></a>
+                                        </td> 
+                                    </tr>
+                                </form>
+                            </table>
+                        </div>
+                        <div class="word-2">
+                            <b>初めてご利用になさる際は、サインアップして、ログインして下さい。{{user.username}}</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </body>
+</html>

@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/home.css'%}">
+{% endblock %}
+{% block title%}X.LiNK|Home{% endblock%}
+{% block content %}
+<div  class="div-bord">
+    <div class="tab-panel">
+        <div class="panel-group">
+            <div class="panel tab-A is-show">
+                <ul class="tab2-group">
+                    <li class="tab2 tab2-A is-active2" >
+                        <a href="/"><button class="button_menu"><b>All</b></button></a>
+                    </li>
+                    {% for category in categorys %}
+                    <li class="tab2 tab2-B is-active3">
+                        <button  id="header_nemu"onMouseOver="beforecolor6()" onMouseOut="aftercolor6()" class="button_menu"><b>{{category}}</b></button>
+                    </li>
+                    {% endfor %} 
+                </ul>
+            </div>
+            <div>
+                <div class="panel2-group">
+                    <div class="panel2 tab2-B is-show2" >
+                        <div class="BORDERS">
+                            {% for account in accounts%}
+                            <ul class="class_bord1">
+                                <div>
+                                    <span style="color: black; top:-3px;box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);">
+                                        <div>
+                                            <a style="color: black;" href="/community/{{account.name}}/"><img class="image_bord" src="/media/{{account.backimage}}" alt="">{{ account.backimage.id | linebreaks }}</a>
+                                        </div>
+                                        <span class="csck">
+                                            <div class="class_names">
+                                                <a style="color: black;" href="/community/{{account.name}}/"><b>{{account.name}}</b></a>
+                                                <small>from<a style="color: black;" href="/account/{{account.managername}}/"><u><img src="/media/{{account.managername.icon}}/" class="class_account_icon" alt=""/><b>{{account.managername}}</b></u></a><b>/[{{account.category}}class]</b></small>
+                                            </div> 
+                                            <b><div class="class_explain">{{account.index}}</div></b>
+                                        </span>
+                                    </span>
+                                </div>
+                            </ul>
+                            <br>
+                            <br>
+                            {% endfor %}
+                        </div>  
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+<script type="text/javascript">
+    id='Post_comment'
+    function x_button(){
+       alert('TEXTBOX');
+    }
+    document.addEventListener('DOMContentLoaded', function(){
+        // タブに対してクリックイベントを適用
+        const tabs = document.getElementsByClassName('tab2');
+        for(let i = 0; i < tabs.length; i++) {
+          tabs[i].addEventListener('click', tabSwitch, false);
+        }
+      
+        // タブをクリックすると実行する関数
+        function tabSwitch(){
+          // タブのclassの値を変更
+          document.getElementsByClassName('is-active2')[0].classList.remove('is-active2');
+          this.classList.add('is-active2');
+          // コンテンツのclassの値を変更
+          document.getElementsByClassName('is-show2')[0].classList.remove('is-show2');
+          const arrayTabs = Array.prototype.slice.call(tabs);
+          const index = arrayTabs.indexOf(this);
+          document.getElementsByClassName('panel2')[index].classList.add('is-show2');
+        };
+      }, false);
+    function inputCheck(){
+        var inputValue = document.getElementById( "id_class_name" ).value;
+        document.getElementById( "check" ).innerHTML = ' ' + inputValue;
+    }
+    function changeColor(){
+        document.getElementById('nemu_button').style.backgroundColor = '#e0e0e0';
+    }
+    
+    function revertColor(){
+        document.getElementById('nemu_button').style.backgroundColor = null; 
+    }
+    function changeColor1(){
+        document.getElementById('nemu_button').style.backgroundColor = '#e0e0e0';
+    }
+    
+    function revertColor1(){
+        document.getElementById('nemu_button').style.backgroundColor = null; 
+    }
+    function beforecolor1(){
+        document.getElementById('nemu_button1').style.backgroundColor = "#e0e0e0";
+    }
+    function aftercolor1(){
+        document.getElementById('nemu_button1').style.backgroundColor = null;
+    }
+
+    function beforecolor2(){
+        document.getElementById('nemu_button2').style.backgroundColor = "#e0e0e0";
+    }
+    function aftercolor2(){
+        document.getElementById('nemu_button2').style.backgroundColor = null;
+    }
+
+    function beforecolor3(){
+        document.getElementById('nemu_button3').style.backgroundColor = "#e0e0e0";
+    }
+    function aftercolor3(){
+        document.getElementById('nemu_button3').style.backgroundColor = null;
+    }
+    
+    function beforecolor4(){
+        document.getElementById('nemu_button4').style.backgroundColor = "#e0e0e0";
+    }
+    function aftercolor4(){
+        document.getElementById('nemu_button4').style.backgroundColor = null;
+    }
+
+    function beforecolor5(){
+        document.getElementById('nemu_button5').style.backgroundColor = "#e0e0e0";
+    }
+    function aftercolor5(){
+        document.getElementById('nemu_button5').style.backgroundColor = null;
+    }
+
+    function changeColor_list(){
+        document.getElementById('list_button').style.backgroundColor = '#e0e0e0';
+    }
+    
+    function revertColor_list(){
+        document.getElementById('list_button').style.backgroundColor = null; 
+    }
+
+    function beforecolor7(){
+        document.getElementById('nemu_button7').style.backgroundColor = '#e0e0e0';
+    }
+    
+    function aftercolor7(){
+        document.getElementById('nemu_button7').style.backgroundColor = null; 
+    }
+</script>
+{% endblock %}

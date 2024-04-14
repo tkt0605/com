@@ -1,0 +1,33 @@
+.headline{
+    position: flex;
+    z-index: 1;
+    background-size:cover;
+    background: black; 
+    border-radius: 10px;
+    padding: 2.5px;
+    font-size: 40px;
+    width: 160px;
+    height: 60px;
+    margin-left: 470px;
+}
+.x{
+    position: relative;
+    color: rgb(0, 255, 42);
+    left: 15px;
+    top: 5px;
+}
+.linkS{
+    position: relative;
+    color: white;
+    left: 15px;
+    top: 5px;
+}
+.register{
+    background: rgb(0, 0, 0);
+    color: rgb(0, 255, 42);
+    border:solid 2px rgb(255, 255, 255);;
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    margin-top: -10px;
+}

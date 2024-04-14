@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        {%load static%}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}"> 
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <title>X.LiNK</title>
+    </head>
+    <body  class="container py-5">
+        <nav class="main_page">
+            <div class="header">
+                <h1>
+                    <div class="head">
+                        <div>
+                            <div class="headline" onclick="clickBtn()"> 
+                                <b class="x">X.</b><b class="linkS">LiNK</b>
+                            </div>
+                        </div>
+                    </div>
+                </h1>
+            </div>
+            <center>
+                <hr>
+                <div class="name">
+                    <h1>Welcome Back</h1>
+                </div>
+                <div class="forms">
+                    <div class="reg_form">
+                        
+                        <form class="forms"  action="{% url 'account_login' %}" enctype="multipart/form-data" method="POST">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                            <button class="register" type="submit"><b>Login</b></button>
+                        </form>
+                        <p class="text-center">アカウントを未登録の時は、<a href="/accounts/signup/">Sign up</a>してください。</p>
+                    </div>
+                </div>
+            </center>
+        </nav>
+    </body>
+    <script type="text/javascript">
+        const element = document.querySelector('label');
+        element.remove();
+        const element1 = document.querySelector('label');
+        element1.remove(); 
+        // 要素を取得
+        const ele = document.getElementById("#text");
+        ele.removeAttribute("id");
+
+    </script>
+</html>

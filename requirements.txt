@@ -1,0 +1,23 @@
+asgiref @ file:///C:/Users/BUILDE~1/AppData/Local/Temp/abs_cchykh5sgr/croots/recipe/asgiref_1661287542702/work
+backports.zoneinfo @ file:///C:/Users/BUILDE~1/AppData/Local/Temp/abs_29zz4uumbw/croots/recipe/backports.zoneinfo_1661287541232/work
+beautifulsoup4 @ file:///C:/b/abs_0agyz1wsr4/croot/beautifulsoup4-split_1681493048687/work
+certifi==2024.2.2
+cffi==1.16.0
+charset-normalizer==3.3.2
+cryptography==42.0.5
+defusedxml==0.7.1
+Django @ file:///C:/Users/BUILDE~1/AppData/Local/Temp/abs_eeor5o9jj8/croots/recipe/django_1661292534510/work
+django-allauth==0.61.1
+idna==3.7
+mod-wsgi==5.0.0
+oauthlib==3.2.2
+pillow==10.3.0
+pycparser==2.22
+PyJWT==2.8.0
+python3-openid==3.2.0
+requests==2.31.0
+requests-oauthlib==2.0.0
+soupsieve @ file:///C:/b/abs_bbsvy9t4pl/croot/soupsieve_1696347611357/work
+sqlparse @ file:///C:/b/abs_88361ub_qu/croot/sqlparse_1690904577514/work
+tzdata @ file:///croot/python-tzdata_1690578112552/work
+urllib3==2.2.1

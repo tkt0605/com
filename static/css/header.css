@@ -1,0 +1,198 @@
+.head{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+    background: white;
+    width: 1700px;
+    height: 62.5px;
+}
+.headline{
+    position: flex;
+    z-index: 1;
+    background-size:cover;
+    background: black; 
+    border-radius: 10px;
+    padding: 2.5px;
+    font-size: 35px;
+    width: 145px;
+    height: 50px;
+    margin-left: 175px;
+    margin-top: 6px;
+}
+.x{
+    position: relative;
+    color: rgb(0, 255, 42);
+    left: 15px;
+    top: 2.5px;
+}
+.linkS{
+    position: relative;
+    color: white;
+    left: 15px;
+    top: 2.5px;
+}
+.bord_nemu_list{
+    margin-top: -22.5px;
+}
+.nemu_list{
+  position: fixed;
+  z-index: 1;
+  background-size:cover;
+  border-radius: 10px;
+  width: 35px;
+  height: 35px;
+  padding: 0.5px;
+  top: 15px; 
+  left: 135px;
+  background: #ffffff;
+  border: #ffffff;
+}
+.main_bord2{
+    background: rgb(241, 240, 240);;
+    z-index: 1;
+    margin: 0;
+    width: 300px;
+    height: 925px;
+    /* margin-left: -280px;
+    margin-top: -53px; */
+    top: 100px;
+    left: 0px;
+    position: fixed;
+}
+.main_bord{
+    top: -10px;
+    left: -100px;
+}
+.dsbc{
+    background: rgb(241, 240, 240) ;
+}
+.search-form-6 {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+  width: 240px;
+  margin-left: 130px;
+  margin-top: -25px;
+}
+
+.search-form-6:hover {
+  box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+}
+
+.search-form-6::before {
+  width: 45px;
+  height: 15px;
+  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%20%3Cpath%20d%3D%22M23.7%2020.8%2019%2016.1c-.2-.2-.5-.3-.8-.3h-.8c1.3-1.7%202-3.7%202-6C19.5%204.4%2015.1%200%209.7%200S0%204.4%200%209.7s4.4%209.7%209.7%209.7c2.3%200%204.3-.8%206-2v.8c0%20.3.1.6.3.8l4.7%204.7c.4.4%201.2.4%201.6%200l1.3-1.3c.5-.5.5-1.2.1-1.6zm-14-5.1c-3.3%200-6-2.7-6-6s2.7-6%206-6%206%202.7%206%206-2.6%206-6%206z%22%20fill%3D%22%239aa0a6%22%3E%3C%2Fpath%3E%20%3C%2Fsvg%3E');
+  background-position: center;
+  background-repeat: no-repeat;
+  content: '';
+}
+
+.search-form-6 input {
+  width: 200px;
+  height: 40px;
+  padding: 5px 35px 5px 0;
+  border: none;
+  box-sizing: border-box;
+  outline: none;
+}
+.aside_bord{
+    position: relative;
+    left: -5px;
+    top: 30px;
+}
+.aside{
+    top: 0px;
+}
+.nemu_bord{
+  margin-top: -25px;
+  margin-left: 125px;
+}
+  .border_2{
+      border:solid 3px rgb(241, 240, 240);
+      border-radius: 10px;
+      width: 250px;
+      height: 52px;
+      left: 10px;
+  }
+  .image1_bord{
+    width: 35px;
+    height: 35px;
+    margin-left: -200px;
+    border-radius: 50px;
+    margin-top: 0px;
+  }
+  .account{
+    /* position: relative; */
+    /* padding:0; */
+    margin-top: -30px;
+    font-size: 20px;
+    left: 0px;
+  }
+  .accounts{
+      margin-top: -30px;
+      font-size: 20px;
+      left: 0px;
+  }
+  .class_account_icon{
+    width: 25px;
+    height: 25px;
+    margin-left: 0px;
+    border-radius: 50px;
+    margin-top: -10px;
+  }
+  .border_1{
+    border:solid 3px rgb(241, 240, 240);
+    border-radius: 10px;
+    width: 250px;
+    height: 52px;
+    left: 0px;
+    margin-top: 10px;
+  }
+  
+  .home{
+      /* position: relative; */
+      margin-top: -25px;
+      /* padding: 0; */
+      font-size: 20px;
+      left: -100px;
+  }
+  .community{
+    /* position: relative; */
+    margin-top: -25px;
+    /* padding: 0; */
+    font-size: 20px;
+    left: -47.5px;
+  }
+  .createclass{
+    /* position: relative; */
+    margin-top: -25px;
+    /* padding: 0; */
+    font-size: 20px;
+    left: -42.5px;
+  }
+  .newpassword{
+    /* position: relative; */
+    margin-top: -25px;
+    /* padding: 0; */
+    font-size: 20px;
+    left: -37.5px;
+  }
+  .rooting{
+      /* position: relative; */
+      margin-top: -25px;
+      /* padding: 0; */
+      font-size: 20px;
+      left: -100px;
+      color: black;
+  }
+  .logout{
+    /* position: relative; */
+    margin-top: -25px;
+    /* padding: 0; */
+    font-size: 20px;
+    left: -100px;
+  }
