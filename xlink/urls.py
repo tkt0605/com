@@ -8,7 +8,7 @@ urlpatterns = [
     path('accounts/', views.index, name="index"),
     path("", views.home, name="home"),
     path('accounts-auth/', include('allauth.urls')),
-    path('profile-create/',views. )
+    # path('profile-create/',views. )
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
