@@ -264,7 +264,7 @@ class CreateAccountView(generic.CreateView):
     template_name = "account.html"
     def get_form_kwargs(self, *args, **kwargs):
         xlink_obj = super().get_form_kwargs(*args, **kwargs)
-        form = AccountForm(self.request.POST, isinstance=User)
+        form = AccountForm(self.request.POST, instance=User)
         xlink_obj["mainuser"] = self.request.user
         xlink_obj["name"] = self.request.user.username
         return xlink_obj
@@ -274,7 +274,7 @@ class ClassCreateView(generic.CreateView):
     template_name = "create.html"
     def get_form_kwargs(self, *args, **kwargs):
         xlink_obj = super().get_form_kwargs(*args, **kwargs)
-        form = ClassCreateForm(self.request.POST, isinstance=Account)
+        form = ClassCreateForm(self.request.POST, instance=Account)
         form.instance.name = self.request.user.username
         xlink_obj["mainuser"] = self.request.user
         xlink_obj["managername"]= Account.objects.get(name=form.instance.name)
@@ -299,7 +299,7 @@ class CreateReturnCommentView(generic.CreateView):
     template_name = "return.html"
     def get_form_kwargs(self, *args, **kwargs):
         kwargs = super().get_form_kwargs(*args, **kwargs)
-        form = ReturnCommentForm(self.request.POST, isinstance=Comment and Account and Group)
+        form = ReturnCommentForm(self.request.POST, instance=Comment and Account and Group)
         form.instance.comment = self.kwargs["pk"]
         form.instance.name = self.kwargs["name"]
         form.instance.user = self.request.user.username

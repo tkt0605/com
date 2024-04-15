@@ -356,4 +356,4 @@ class CreateReturnComment(generic.CreateView):
 		kwargs['comment'] = Comment.objects.get(id=form.instance.comment)
 		kwargs['user'] = Account.objects.get(name=form.instance.user)
 		return kwargs 
-re_comment_form=CreateReturnComment.as_view()
+form_return=CreateReturnComment.as_view()

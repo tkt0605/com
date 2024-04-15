@@ -6,9 +6,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('accounts/', views.index, name="index"),
-    path("", views.home, name="home"),
+    path("", views.accounts, name="home"),
     path('accounts-auth/', include('allauth.urls')),
-    # path('profile-create/',views. )
+    path('profile-create/',views.form_create, name="account" ),
+    path("create/class.html", views.form_class, name="createclass"),
+    path('account/<str:name>/', views.room, name="room"),
+    path('community/<str:name>/', views.community, name="community"),
+    path('community/comment/<str:name>/', views.form_comment, name="comment"),
+    path('compose/recomments/<int:pk>/<str:name>/', views.form_return, name="form_return"),
+    path('follow_count', views.follow_count, name="follow_count"),
+    path('root_selecter', views.root_selecter, name="root_selecter"),
+    path('follow_count', views.follow_count, name="follow_counts"),
+    path('root_count', views.root_count, name="root_count"),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
