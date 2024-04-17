@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static "css/class.css" %}">
+{% endblock  %}
+{% block title %}X.LiNK | Class{% endblock  %}
+{% block content %}
+<div class="tab-panel">
+    <div class="panel-group">
+        <div class="panel tab-A is-show">
+            <div class="bord">
+                <span class="bavkimage">
+                    <img src="/media/{{community.backimage}}/" class="backimages"/>{{community.backimage.id | linebreaks}}
+                </span>
+                <br>
+                <div class="bord_main">
+                    <div class="title_bord">
+                        <img src="/media/{{commuhnity.icon}}/" class="class_icon"/>
+                        <b><span class="community_name">{{community.name}}</span></b>
+                        <hr class="hr_class_name">
+                        <from id="follow_button" action="/follow_count" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="user" value="{{community}}" readonly/>
+                            <input type="hidden" name="follower" vslue="{{user.username}}" readonly/>
+                            {% if follow_button_value == "follow" %}
+                            <div class="follow_button2">
+                                <input type="hidden" name="value" value="follow" readonly/>
+                                <button></button>
+                            </div>
+                            {% endif %}
+                        </from>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}
