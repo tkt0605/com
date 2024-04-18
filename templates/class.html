@@ -26,10 +26,42 @@
                             {% if follow_button_value == "follow" %}
                             <div class="follow_button2">
                                 <input type="hidden" name="value" value="follow" readonly/>
-                                <button></button>
+                                <button type="hidden" class="follow"><b>参加する</b></button>
+                            </div>
+                            {% else %}
+                            <div class="follow_button2">
+                                <input class="unfollow" type="hidden" name="value" value="following" readonly/>
+                                <button type="submit" class="following"><b>参加中</b></button>
                             </div>
                             {% endif %}
                         </from>
+                        {% if community.mainuser == user %}
+                        <div class="empty"></div>
+                        {% endif %}
+                        <form id="post_button" action="/root_selecter" method="POST">
+                            {% csrf_token %}
+                            {% for manage in manages %}
+                            <input type="hidden" name="rooter" value="{{manage.name}}" readonly/>
+                            <input type="hidden" name="group" value="{{community}}" readonly/>
+                            <input type="hidden" name="user" value="{{user./username}}" readonly/>
+                            {% endfor %}
+                            {% if root_button_value == "root" %}
+                            <div class="class-root" class="btn-group" role="group" aria-label>
+                                <div class="btn-button" rol="group">
+                                    <input type="hidden" name="value" value= "root" readonly/>
+                                    <button id="btnGroupDrop1" data-bs-toggle="dropdown" aria-expanded="false" class="root">
+                                        <b>>>>>>>>></b>
+                                        {% for manage in manages %}
+                                        <div style="display: none;">{{manage}}</div>
+                                        <div style="display: none;">{{community}}</div>
+                                        {% endfor %}
+                                        
+                                    </button>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </form>
+
                     </div>
                 </div>
             </div>
