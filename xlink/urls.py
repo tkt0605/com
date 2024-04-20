@@ -9,7 +9,7 @@ urlpatterns = [
     path("", views.accounts, name="home"),
     path('accounts-auth/', include('allauth.urls')),
     path('profile-create/',views.form_create, name="account" ),
-    path("create/class.html", views.form_class, name="createclass"),
+    path("class/create.html", views.form_class, name="createclass"),
     path('account/<str:name>/', views.room, name="room"),
     path('community/<str:name>/', views.community, name="community"),
     path('community/comment/<str:name>/', views.form_comment, name="comment"),

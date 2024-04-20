@@ -54,6 +54,14 @@
                             </button>
                         </a>
                     </li>
+                    {% elif room.mainuser != user %}
+                    <li style="color: rgb(241, 240, 240);">
+                        <a href="http://xlink.com/profile-create/" class="side_name">
+                            <button   id="nemu_button"  onMouseOver="changeColor1()" onMouseOut="revertColor1()"class="border_1">
+                                <b><div class="accounts">{{user.username}}</div></b>
+                            </button>
+                        </a>
+                    </li>
                     {% endif %}
                     {% endfor%}
                     <li style="color: rgb(241, 240, 240);">
@@ -80,7 +88,7 @@
                         </a>
                     </li>
                     <li style="color: rgb(241, 240, 240);">
-                        <a class="side_name" href='/class/create.html/'>
+                        <a class="side_name" href='/class/create.html'>
                             <button id="nemu_button3"  onMouseOver="beforecolor3()" onMouseOut="aftercolor3()" class="border_2">
                                 <svg style="position: relative; margin-left:  -200px; margin-top: 7px;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-window-plus" viewBox="0 0 16 16">
                                     <path d="M2.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1ZM4 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Zm2-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0Z"/>

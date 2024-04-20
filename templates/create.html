@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        {% load crispy_forms_tags %}
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/account.css'%}">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <title>X.LiNK | Class/Create</title>
+    </head>
+    <body style="background: rgb(241, 240, 240) ;"  class="container py-5">
+        <center>
+            <header>
+                <div class="header">
+                    <h1>
+                        <div class="head">
+                            <div class="headline"> 
+                                <b class="x">X.</b><b class="link">LiNK</b>
+                            </div>
+                        </div>
+                    </h1>
+                </div>
+            </header>
+            <hr>
+            <div class="name">
+                Class作成
+            </div>
+            <br>
+            <div class="forms">
+                <div class="reg_form">
+                    <form class="forms" enctype="multipart/form-data" method="post">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button class="create" type="submit"><b>作成</b></button>
+                    </form>
+                </div>
+            </div>
+        </center>
+    </body>
+    <script type="text/javascript">
+    </script>
+</html>

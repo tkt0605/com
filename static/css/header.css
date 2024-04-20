@@ -111,32 +111,30 @@
   margin-top: -25px;
   margin-left: 125px;
 }
-  .border_2{
+.border_2{
       border:solid 3px rgb(241, 240, 240);
       border-radius: 10px;
       width: 250px;
       height: 52px;
       left: 10px;
   }
-  .image1_bord{
+.image1_bord{
     width: 35px;
     height: 35px;
     margin-left: -200px;
     border-radius: 50px;
     margin-top: 0px;
   }
-  .account{
-    /* position: relative; */
-    /* padding:0; */
-    margin-top: -30px;
-    font-size: 20px;
-    left: 0px;
-  }
-  .accounts{
-      margin-top: -30px;
-      font-size: 20px;
-      left: 0px;
-  }
+.account{
+  margin-top: -30px;
+  font-size: 20px;
+  left: 0px;
+}
+.accounts{
+  margin-top: -1px;
+  font-size: 20px;
+  left: 0px;
+}
   .class_account_icon{
     width: 25px;
     height: 25px;

@@ -16,6 +16,7 @@ class Category(models.Model):
         return self.name
 class Account(models.Model):
     HOBBIES ={
+        ('・・・・', '・・・・'),
         ('読書', '読書'),
         ('ゲーム', 'ゲーム'),
         ('映画', '映画'),
@@ -26,20 +27,21 @@ class Account(models.Model):
         ('プログラミング', 'プログラミング')
     }
     DETAILS = {
+        ('・・・・', '・・・・'),
         ('小学生', '小学生'),
         ('中学生', '中学生'),
         ('高校生', '高校生'),
         ('大学生', '大学生'),
         ('社会人', '社会人'),
     }
-    mainuser = models.ForeignKey(User,  on_delete=models.PROTECT, verbose_name="メインユーザー", blank=True, null=True)
+    mainuser = models.ForeignKey(User,  on_delete=models.PROTECT, verbose_name="メインユーザー", blank=True, null=True, default="")
     # name = models.ForeignKey(User,on_delete=models.CASCADE, verbose_name='ユーザー名', blank=True, null=True)
     name = models.CharField(max_length=15, verbose_name='ユーザー名', blank=True, null=True, default="")
-    image = models.ImageField(upload_to='image/', verbose_name="バックイメージ")
-    icon = models.ImageField(upload_to='icon/', verbose_name="アイコン")
-    infomation = models.TextField(max_length=180, verbose_name="紹介文",blank=True, null=True)
-    hobby =  models.CharField(max_length=8, choices=HOBBIES)
-    detail = models.CharField(max_length=8, choices=DETAILS)
+    image = models.ImageField(upload_to='backimage/', verbose_name="バックイメージ",blank=True, null=True, default="media/defult/defultback.jpg/")
+    icon = models.ImageField(upload_to='icon/', verbose_name="アイコン", blank=True, null=True, default="media/defult/5770f01a32c3c53e90ecda61483ccb08.jpg/")
+    infomation = models.TextField(max_length=180, verbose_name="紹介文",blank=True, null=True, default="・・・・")
+    hobby =  models.CharField(max_length=8, choices=HOBBIES, default="・・・・")
+    detail = models.CharField(max_length=8, choices=DETAILS, default="・・・・")
     created_at = models.DateTimeField(auto_now_add=True,null=True  ,verbose_name='作成日')
     def __str__(self):
         return str(self.name)
