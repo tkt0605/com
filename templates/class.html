@@ -10,62 +10,549 @@
     <div class="panel-group">
         <div class="panel tab-A is-show">
             <div class="bord">
-                <span class="bavkimage">
-                    <img src="/media/{{community.backimage}}/" class="backimages"/>{{community.backimage.id | linebreaks}}
-                </span>
-                <br>
-                <div class="bord_main">
-                    <div class="title_bord">
-                        <img src="/media/{{commuhnity.icon}}/" class="class_icon"/>
-                        <b><span class="community_name">{{community.name}}</span></b>
-                        <hr class="hr_class_name">
-                        <from id="follow_button" action="/follow_count" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="user" value="{{community}}" readonly/>
-                            <input type="hidden" name="follower" vslue="{{user.username}}" readonly/>
-                            {% if follow_button_value == "follow" %}
-                            <div class="follow_button2">
-                                <input type="hidden" name="value" value="follow" readonly/>
-                                <button type="hidden" class="follow"><b>参加する</b></button>
-                            </div>
-                            {% else %}
-                            <div class="follow_button2">
-                                <input class="unfollow" type="hidden" name="value" value="following" readonly/>
-                                <button type="submit" class="following"><b>参加中</b></button>
-                            </div>
-                            {% endif %}
-                        </from>
-                        {% if community.mainuser == user %}
-                        <div class="empty"></div>
-                        {% endif %}
-                        <form id="post_button" action="/root_selecter" method="POST">
-                            {% csrf_token %}
-                            {% for manage in manages %}
-                            <input type="hidden" name="rooter" value="{{manage.name}}" readonly/>
-                            <input type="hidden" name="group" value="{{community}}" readonly/>
-                            <input type="hidden" name="user" value="{{user./username}}" readonly/>
-                            {% endfor %}
-                            {% if root_button_value == "root" %}
-                            <div class="class-root" class="btn-group" role="group" aria-label>
-                                <div class="btn-button" rol="group">
-                                    <input type="hidden" name="value" value= "root" readonly/>
-                                    <button id="btnGroupDrop1" data-bs-toggle="dropdown" aria-expanded="false" class="root">
-                                        <b>>>>>>>>></b>
-                                        {% for manage in manages %}
-                                        <div style="display: none;">{{manage}}</div>
-                                        <div style="display: none;">{{community}}</div>
-                                        {% endfor %}
-                                        
-                                    </button>
+                    <span class="backimage">
+                        <img src="/media/{{community.backimage}}/" class="backimages">{{ community.backimage.id | linebreaks }}
+                    </span>
+                    <br>
+                    <div class="bord_main">
+                        <div class="title_bord">
+                            <img src="/media/{{community.icon}}" class="class_icon"/>
+                            <b><span class="community_name">{{community.name}}</span></b>
+                            <hr class="hr_class_name">
+                            <form id="follow_button" action="/follow_count" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="user" value="{{community}}"readonly/>
+                                <input type="hidden" name="follower" value="{{user.username}}" readonly/>
+                                {% comment %} <input type="hidden" name="comment" value="{{comment_name}}" readonly/> {% endcomment %}
+                                {% if follow_button_value == 'follow' %}
+                                <div class="follow_button2">
+                                    <input type="hidden" name="value" value="follow" readonly/>
+                                    <button type="submit" class="follow"><b>メンバーになる</b><div style="display:none;">{{user.username}}</div></button>
                                 </div>
+                                {% else %}
+                                <div class="follow_button2">
+                                    <input  class="unfollow" type="hidden" name="value" value="following" readonly/>
+                                    <button type="submit" class="following"><b>メンバー中</b><div style="display:none;">{{user.username}}</div></button>
+                                </div>
+                                {% endif %}
+                            </form>
+                            {% if community.mainuser == user %}
+                            <div class="dsch"></div>
+                            {% else %}
+                            <form id="post_button" action="/root_selecter" method="post">
+                                {% csrf_token %}
+                                {% for manage in manages %}
+                                <input type="hidden" name="rooter" value="{{manage.name}}"readonly/>
+                                <input type="hidden" name="group" value="{{community}}" readonly/>
+                                <input type="hidden" name="user" value="{{user.username}}" readonly/>
+                                {% endfor %}
+                                {% if root_button_value == 'root' %}
+                                <div class="class-root" class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                    <div class="btn-group" role="group">
+                                        <input type="hidden" name="value" value="root" readonly/>
+                                        <button id="btnGroupDrop1" data-bs-toggle="dropdown" aria-expanded="false" class="root" type="submit" type="submit" >
+                                            <b>ルート</b>
+                                            {% for manage in manages %}
+                                            <div style="display: none;">{{manage}}</div>
+                                            <div style="display: none;">{{community}}</div>
+                                            {% endfor %}
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            {% for manage in manages %}
+                                            <li>
+                                                <button type="submit" class='dropdown-item'>
+                                                    <img class="icon" src="/media/{{manage.icon}}/"/>{{manage.name}}
+                                                </button>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div> 
+                                {%else%}
+                                <div class="class-root" class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                    <div class="btn-group" role="group">
+                                        <input type="hidden" name="value" value="rooting" readonly/>
+                                        <button id="btnGroupDrop1" data-bs-toggle="dropdown" aria-expanded="false" class="rooting1"type="submit">
+                                            <b>ルート中</b>
+                                            {% for manage in manages %}
+                                            <div style="display: none;">{{manage}}</div>
+                                            <div style="display: none;">{{community}}</div>
+                                            {% endfor %}
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            <li>
+                                                <button type="submit" class='dropdown-item'>ルートを解除する</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div> 
+                                {% endif %}
+                            </form>
+                            {% endif %} 
+                        </div>
+                        <div class="details_bords">
+                            <small>
+                                {% if root_button_value == 'root' %}
+                                <div class="class_info">
+                                    <b><div class="class_index">{{community.index}}</div></b>
+                                    <div class="class_explains">{{community.explain}}</div>
+                                    <div class="jnvefpnfdvjdsnvjsdnvjdf">
+                                        <li class="url">
+                                            <span class="url-link">
+                                                <b>
+                                                    <b>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                                                            <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                                            <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                                        </svg>
+                                                    </b>
+                                                    <a class="sdass" onClick="changeLocation()" href="{{community.web_site}}">{{community.web_site}}</a>
+                                                </b>
+                                            </span>
+                                        </li>
+                                        <li class="apporch">
+                                            <span class="apporch_link">
+                                                <b>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bezier2" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M1 2.5A1.5 1.5 0 0 1 2.5 1h1A1.5 1.5 0 0 1 5 2.5h4.134a1 1 0 1 1 0 1h-2.01c.18.18.34.381.484.605.638.992.892 2.354.892 3.895 0 1.993.257 3.092.713 3.7.356.476.895.721 1.787.784A1.5 1.5 0 0 1 12.5 11h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5H6.866a1 1 0 1 1 0-1h1.711a2.839 2.839 0 0 1-.165-.2C7.743 11.407 7.5 10.007 7.5 8c0-1.46-.246-2.597-.733-3.355-.39-.605-.952-1-1.767-1.112A1.5 1.5 0 0 1 3.5 5h-1A1.5 1.5 0 0 1 1 3.5v-1zM2.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10 10a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+                                                    </svg>
+                                                </b>
+                                            </b>
+                                                {% if roots %}
+                                                {% for root in roots %}
+                                                <b>
+                                                    <b>
+                                                        <svg style="color: black;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-at" viewBox="0 0 16 16">
+                                                            <path d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"/>
+                                                        </svg>
+                                                    </b>
+                                                    <a class="sdas" href="/community/{{root}}/">{{root}}</a>
+                                                </b>
+                                                {% endfor %}
+                                                {% else %}
+                                                <b><a class="sdas" href="/community/{{community.name}}/">nothing</a></b>
+                                                {% endif %}
+                                            </span>
+                                        <li class="production">
+                                            <span>
+                                                <b>
+                                                    <svg class="c_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16">
+                                                        <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512Z"/>
+                                                    </svg>
+                                                    <a href="/account/{{community.managername}}/">
+                                                        <img src="/media/{{community.managername.icon}}/" class="managername_icon" alt=""/><div class="class_managername">{{community.managername}}<small style='color: black;'>production</small></div>
+                                                    </a>
+                                                </b>
+                                            </span>
+                                        </li>
+                                        <li class="class">
+                                            <svg style="margin-top: 30px; margin-left: -20px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                            </svg>
+                                            <span class="group">
+                                                <div class="time">このクラスは{{community.created_at|date:'Y年n月'}}に作成しました。</div>
+                                            </span>
+                                        </li>
+                                        <li class="followerscount">
+                                            <span><b>{{user_followers}}</b></span>
+                                            <div class="followandfollower">members</div>
+                                        </li>
+                                        <li class="commentscount">
+                                            <b><span id="comments_counter"></span></b>
+                                            <div class="commentcount">comments</div>
+                                        </li>
+                                    </div>
+                                </div>
+                                {%elif community.mainuser == user %}
+                                <div class="class_info3">
+                                    <b><div class="class_index">{{community.index}}</div></b>
+                                    <div class="class_explains">{{community.explain}}</div>
+                                    <div class="jnvefpnfdvjdsnvjsdnvjdf">
+                                        <li class="url">
+                                            <span class="url-link">
+                                                <b>
+                                                    <b>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                                                            <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                                            <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                                        </svg>
+                                                    </b>
+                                                    <a class="sdass" href="{{community.web_site}}">{{community.web_site}}</a>
+                                                </b>
+                                            </span>
+                                        </li>
+                                        <li class="apporch">
+                                            <span class="apporch_link">
+                                                <b>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bezier2" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M1 2.5A1.5 1.5 0 0 1 2.5 1h1A1.5 1.5 0 0 1 5 2.5h4.134a1 1 0 1 1 0 1h-2.01c.18.18.34.381.484.605.638.992.892 2.354.892 3.895 0 1.993.257 3.092.713 3.7.356.476.895.721 1.787.784A1.5 1.5 0 0 1 12.5 11h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5H6.866a1 1 0 1 1 0-1h1.711a2.839 2.839 0 0 1-.165-.2C7.743 11.407 7.5 10.007 7.5 8c0-1.46-.246-2.597-.733-3.355-.39-.605-.952-1-1.767-1.112A1.5 1.5 0 0 1 3.5 5h-1A1.5 1.5 0 0 1 1 3.5v-1zM2.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10 10a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+                                                    </svg>
+                                                </b>
+                                                {% if roots %}
+                                                {% for root in roots %}
+                                                <b>
+                                                    <b>
+                                                        <svg style="color: black;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-at" viewBox="0 0 16 16">
+                                                            <path d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"/>
+                                                        </svg>
+                                                    </b>
+                                                    <a class="sdas" href="/community/{{root}}/">{{root}}</a>
+                                                </b>
+                                                {% endfor %}
+                                                {% else %}
+                                                <b><a class="sdas" href="/community/{{community.name}}/">nothing</a></b>
+                                                {% endif %}
+                                            </span>
+                                        </li>
+                                        <li class="production">
+                                            <span>
+                                                <b>
+                                                    <svg class="c_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16">
+                                                        <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512Z"/>
+                                                    </svg>
+                                                    <a href="/account/{{community.managername}}/">
+                                                        <img src="/media/{{community.managername.icon}}/" class="managername_icon" alt=""/><div class="class_managername">{{community.managername}}<small style='color: black;'>production</small></div>
+                                                    </a>
+                                                </b>
+                                            </span>
+                                        </li>
+                                        <li class="class">
+                                            <svg style="margin-top: 30px; margin-left: -20px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                                <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                                <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                            </svg>
+                                            <span class="group">
+                                                <div class="time">このクラスは{{community.created_at|date:'Y年n月'}}に作成しました。</div>
+                                            </span>
+                                        </li>
+                                        <li class="followerscount">
+                                            <span><b>{{user_followers}}</b></span>
+                                            <div class="followandfollower">members</div>
+                                        </li>
+                                        <li class="commentscount">
+                                            <b><span id="comments_counter">{{user_comments}}</span></b>
+                                            <div class="commentcount">comments</div>
+                                        </li>
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div class="class_info2">
+                                    <b><div class="class_index">{{community.index}}</div></b>
+                                    <div class="class_explains">{{community.explain}}</div>
+                                    <div class="jnvefpnfdvjdsnvjsdnvjdf">
+                                        <li class="url">
+                                            <span class="url-link">
+                                                <b>
+                                                    <b>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                                                            <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+                                                            <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+                                                        </svg>
+                                                    </b>
+                                                    <a class="sdass" onClick="changeLocation()" href="{{community.web_site}}">{{community.web_site}}</a>
+                                                </b>
+                                            </span>
+                                        </li>
+                                        <li class="apporch">
+                                            <span class="apporch_link">
+                                                <b>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bezier2" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M1 2.5A1.5 1.5 0 0 1 2.5 1h1A1.5 1.5 0 0 1 5 2.5h4.134a1 1 0 1 1 0 1h-2.01c.18.18.34.381.484.605.638.992.892 2.354.892 3.895 0 1.993.257 3.092.713 3.7.356.476.895.721 1.787.784A1.5 1.5 0 0 1 12.5 11h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5H6.866a1 1 0 1 1 0-1h1.711a2.839 2.839 0 0 1-.165-.2C7.743 11.407 7.5 10.007 7.5 8c0-1.46-.246-2.597-.733-3.355-.39-.605-.952-1-1.767-1.112A1.5 1.5 0 0 1 3.5 5h-1A1.5 1.5 0 0 1 1 3.5v-1zM2.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10 10a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+                                                    </svg>
+                                                </b>
+                                                {% if roots %}
+                                                {% for root in roots %}
+                                                <b>
+                                                    <b>
+                                                        <svg style="color: black;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-at" viewBox="0 0 16 16">
+                                                            <path d="M13.106 7.222c0-2.967-2.249-5.032-5.482-5.032-3.35 0-5.646 2.318-5.646 5.702 0 3.493 2.235 5.708 5.762 5.708.862 0 1.689-.123 2.304-.335v-.862c-.43.199-1.354.328-2.29.328-2.926 0-4.813-1.88-4.813-4.798 0-2.844 1.921-4.881 4.594-4.881 2.735 0 4.608 1.688 4.608 4.156 0 1.682-.554 2.769-1.416 2.769-.492 0-.772-.28-.772-.76V5.206H8.923v.834h-.11c-.266-.595-.881-.964-1.6-.964-1.4 0-2.378 1.162-2.378 2.823 0 1.737.957 2.906 2.379 2.906.8 0 1.415-.39 1.709-1.087h.11c.081.67.703 1.148 1.503 1.148 1.572 0 2.57-1.415 2.57-3.643zm-7.177.704c0-1.197.54-1.907 1.456-1.907.93 0 1.524.738 1.524 1.907S8.308 9.84 7.371 9.84c-.895 0-1.442-.725-1.442-1.914z"/>
+                                                        </svg>
+                                                    </b>
+                                                    <a class="sdas" href="/community/{{root}}/">{{root}}</a>
+                                                </b>
+                                                {% endfor %}
+                                                {% else %}
+                                                <b><a class="sdas" href="/community/{{community.name}}/">nothing</a></b>
+                                                {% endif %}
+                                            </span>
+                                        </li>
+                                        <li class="production">
+                                            <span>
+                                                <b>
+                                                    <svg class="c_icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-c-circle" viewBox="0 0 16 16">
+                                                        <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM8.146 4.992c-1.212 0-1.927.92-1.927 2.502v1.06c0 1.571.703 2.462 1.927 2.462.979 0 1.641-.586 1.729-1.418h1.295v.093c-.1 1.448-1.354 2.467-3.03 2.467-2.091 0-3.269-1.336-3.269-3.603V7.482c0-2.261 1.201-3.638 3.27-3.638 1.681 0 2.935 1.054 3.029 2.572v.088H9.875c-.088-.879-.768-1.512-1.729-1.512Z"/>
+                                                    </svg>
+                                                    <a href="/account/{{community.managername}}/">
+                                                        <img src="/media/{{community.managername.icon}}/" class="managername_icon" alt=""/><div class="class_managername">{{community.managername}}<small style='color: black;'>production</small></div>
+                                                    </a>
+                                                </b>
+                                            </span>
+                                        </li>
+                                        <li class="class">
+                                            <svg style="margin-top: 30px; margin-left: -20px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
+                                              <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                                              <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                            </svg>
+                                            <span class="group">
+                                              <div class="time">このクラスは{{community.created_at|date:'Y年n月'}}に作成しました。</div>
+                                            </span>
+                                        </li>
+                                        <li class="followerscount">
+                                            <span><b>{{user_followers}}</b></span>
+                                            <div class="followandfollower">members</div>
+                                        </li>
+                                        <li class="commentscount">
+                                            <b><span id="comments_counter"></span></b>
+                                            <div class="commentcount">comments</div>
+                                        </li>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </small>
+                        </div>
+                        <ul class="tab2-group">
+                            <li class="tab2 tab2-A is-active2">
+                                <div class="menu"><b>投稿</b></div>
+                            </li>
+                            <li class="tab2 tab2-B">
+                                <div class="menu"><b>ルート中</b></div>
+                            </li>       
+                            <li class="tab2 tab2-B">
+                                <div class="menu"><b>ルーター</b></div>
+                            </li>
+                            <li class="tab2 tab2-B">
+                                <div class="menu"><b>メンバー</b></div>
+                            </li>           
+                        </ul>
+                    </div>
+                    <br>
+                <div class="main_bord3">
+                    <div class="panel2-group">
+                        <div class="panel2 tab2-A is-show2">
+                            <div class="class_post_field">
+                                {% for comment in comments %}
+                                {% if comment.destination == community %}
+                                <span>
+                                    {%if comment.image and comment.destination == community %}
+                                    <div class="jvsbdvjkds" id="nbgsfdgcsdcfs">
+                                        <ul class="comments_bord2">
+                                            <a href="/account/{{comment.user}}/">
+                                                <img class="image_bord" src="/media/{{comment.user.icon}}" alt="">
+                                                <b><li class="comment_commenter_name"><a href="/account/{{comment.user}}/">{{comment.user}}</a><small>/@To the <u>{{comment.destination}}</u></small></li></b>
+                                            </a>
+                                            <div class="comment_time"><small>[{{comment.created_at}}]</small></div>
+                                            <br>
+                                            <div id="text" class="comment">{{comment.text}}</div>
+                                            <div class="swiper">
+                                                <!-- Additional required wrapper -->
+                                                <div class="swiper-wrapper">
+                                                    <div class="swiper-slide">
+                                                        <img alt="Image" class="zxxcvbnm" src="/media/{{comment.image}}"id="image"/>
+                                                    </div>
+                                                </div>
+                                                <!-- 必要に応じてページネーション -->
+                                                <div class="swiper-pagination"></div>
+                                                <!-- 必要に応じてナビボタン -->
+                                                <div class="swiper-button-prev"></div>
+                                                <div class="swiper-button-next"></div>
+                                            </div>
+                                            <br>
+                                        </ul>
+                                        <br>
+                                    </div>
+                                    {%elif comment.video and comment.destination == community %}
+                                    <div class="jvsbdvjkds" id="nbgsfdgcsdcfs">
+                                        <ul class="comments_bord2">
+                                            <a href="/account/{{comment.user}}/">
+                                                <img class="image_bord" src="/media/{{comment.user.icon}}" alt="">
+                                                <b><li class="comment_commenter_name"><a href="/account/{{comment.user}}/">{{comment.user}}</a><small>/@To the <u>{{comment.destination}}</u></small></li></b>
+                                            </a>
+                                            <div class="comment_time"><small>[{{comment.created_at}}]</small></div>
+                                            <br>
+                                            <div id="text" class="comment">{{comment.text}}</div>
+                                            <video class="zxxcvbnm2"  src="/media/{{comment.video}}/" id="image" controls></video>
+                                            <br>
+                                        </ul>
+                                        <br>
+                                    </div>
+                                    {% else%}
+                                    <div class="jvsbdvjkds2" id="nbgsfdgcsdcfs">
+                                        <ul class="comments_bord">
+                                            <a href="/account/{{comment.user}}/">
+                                                <img class="image_bord" src="/media/{{comment.user.icon}}" alt="">
+                                                <b><li class="comment_commenter_name"><a href="/account/{{comment.user}}/">{{comment.user}}</a><small>/@To the <u>{{comment.destination}}</u></small></li></b>
+                                            </a>
+                                            <div class="comment_time"><small>[{{ comment.created_at}}]</small></div>
+                                            <br>
+                                            <div id="text" class="comment">{{comment.text}}</div>
+                                            <br>
+                                        </ul>
+                                    </div>
+                                    {% endif %}
+                                    <div>
+                                        <ul>
+                                            <div id="return1_link" class="return2">
+                                                <details class="details">
+                                                    <summary class="details__summary">
+                                                        <div class="sbcoajhbc"><b><span id="dsjcjbdsj"></span></b>件の返信</div>
+                                                        <div class="re_comment">
+                                                            <a href="{% url 'xlink:re_comment_form' comment.id comment.destination %}">  
+                                                                <button class="replay_button" id="replay_button1"  onMouseOver="replay_changeColor()" onMouseOut="replay_revertColor()">
+                                                                    <div  class="replay"><b>返信</b></div>
+                                                                    <div class="comment_icon">
+                                                                        <svg  xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chat-left" viewBox="0 0 16 16">
+                                                                            <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                                        </svg>
+                                                                    </div>
+                                                                </button>
+                                                            </a>
+                                                            <div id="return_comments"></div>
+                                                        </div> 
+                                                        </summary>
+                                                        <div class="return_comment_line" aria-hidden="true">
+                                                            <div data-testid="main-thread-line" class="line"></div>
+                                                        </div>
+                                                        <div class="return_comments">
+                                                            {% for return_comment in return_comments %}
+                                                            {% if comment.id == return_comment.comment.id%}
+                                                            <svg class="comment_dot" aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-dot-fill mb-2">
+                                                                <path d="M8 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"></path>
+                                                            </svg>
+                                                            <div class="details_content" id="return_commentss" >
+                                                                <div class="nspcoansdcededwedw"> 
+                                                                    <a href="/account/{{return_comment.user}}/">
+                                                                        <img class="image2_bord" src="/media/{{return_comment.user.icon}}" alt="">
+                                                                        <li class="kscmklcdsmcokwmcowkqmcowkc"><a href="/account/{{return_comment.user}}/">{{return_comment.user}}</a><small>/@To the <u>{{comment.destination}}</u></small></li>
+                                                                    </a>
+                                                                    <div style="margin-top: -15px; margin-left: 60px;">
+                                                                        <small>[{{return_comment.created_at}}]</small>
+                                                                    </div>
+                                                                    <blockquote id="text2" class="mcxnmnvzxmcvnzxcvnzxczxcasAPKODASJCO">{{return_comment.text}}</blockquote> 
+                                                                </div>
+                                                            </div>
+                                                            {%endif%}
+                                                            {%endfor%}
+                                                        </div>
+                                                    </summary>
+                                                 </details>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </span>
+                                {% endif %}
+                                {%endfor%}
                             </div>
-                            {% endif %}
-                        </form>
-
+                        </div>
+                        <div class="panel2 tab2-B">
+                            <br>
+                            <div class="followerroom">
+                                <div class="post_talk_bord">
+                                    <hr class="hr_follower">
+                                    <div class="follower"><b><center>Rooting</center></b></div>
+                                    <li style="color: white">
+                                      {% for root in roots %}
+                                      <ul class="followers_list">
+                                        {% for group in groups%}
+                                        {% if root.group == group.name %}
+                                        <li class="followers_class">
+                                          <b><a href="/community/{{group.name}}/"><img src="/media/{{group.icon}}/" class="user_icon"/><div class="font">{{group.name}}</div></a></b>
+                                          <div class="class_indexs"><small><b>{{group.index}}</b></small></div>
+                                        </li>
+                                        <br>
+                                        {% endif %}
+                                        {%endfor%}
+                                      </ul>
+                                      {%endfor%}
+                                    </li>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="panel2 tab2-C">
+                            <br>
+                            <div class="followerroom">
+                                <div class="post_talk_bord">
+                                    <hr class="hr_follower">
+                                    <div class="follower"><b><center>Rooters</center></b></div>
+                                    <li style="color: white">
+                                      {% for rooter in rooters %}
+                                      <ul class="followers_list">
+                                        {% for group in groups%}
+                                        {% if rooter.rooter == group.name %}
+                                        <li class="followers_class">
+                                          <b><a href="/community/{{group.name}}/"><img src="/media/{{group.icon}}/" class="user_icon"/><div class="font">{{group.name}}</div></a></b>
+                                          <div class="class_indexs"><small><b>{{group.index}}</b></small></div>
+                                        </li>
+                                        <br>
+                                        {% endif %}
+                                        {%endfor%}
+                                      </ul>
+                                      {%endfor%}
+                                    </li>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="panel2 tab2-D">
+                            <br>
+                            <div class="followerroom">
+                                <div class="post_talk_bord">
+                                    <hr class="hr_follower">
+                                    <div class="follower"><b><center>Members</center></b></div>
+                                    <li style="color: white">
+                                      <ul class="followers_list">
+                                        {% for following in followings %}
+                                        {% for room in rooms%}
+                                        {% if following.follower == room.name %}
+                                        <li class="followers">
+                                          <b>
+                                            <a href="/account/{{room.name}}/"><div class="font_2"><img src="/media/{{room.icon}}/" class="root_user_icon"/>{{room.name}}</div></a>
+                                          </b>
+                                        </li>
+                                        {% endif %}
+                                        {%endfor%}
+                                        {%endfor%}
+                                      </ul>
+                                    </li>
+                                    <br>
+                                  </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function(){
+        // タブに対してクリックイベントを適用
+        const tabs = document.getElementsByClassName('tab2');
+        for(let i = 0; i < tabs.length; i++) {
+          tabs[i].addEventListener('click', tabSwitch, false);
+        }
+      
+        // タブをクリックすると実行する関数
+        function tabSwitch(){
+          // タブのclassの値を変更
+          document.getElementsByClassName('is-active2')[0].classList.remove('is-active2');
+          this.classList.add('is-active2');
+          // コンテンツのclassの値を変更
+          document.getElementsByClassName('is-show2')[0].classList.remove('is-show2');
+          const arrayTabs = Array.prototype.slice.call(tabs);
+          const index = arrayTabs.indexOf(this);
+          document.getElementsByClassName('panel2')[index].classList.add('is-show2');
+        };
+    }, false);
+    window.onload = function () {
+        var num = document.querySelectorAll("div[id=text]").length;
+        var re_text = document.querySelectorAll("div[id=text2]").length;
+        console.log( num );
+        console.log(re_text);
+        document.getElementById("comments_counter").innerText = num;
+        document.getElementById("dsjcjbdsj").innterText = re_text;
+    }; return_commentss
+    const element = document.getElementById('text');
+    console.log(element.getAttribute('id'));
+</script>
+
 {% endblock  %}
