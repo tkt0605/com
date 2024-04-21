@@ -6,4 +6,4 @@ from .models import Account
 @receiver(post_save, sender=get_user_model())
 def create_user_account(sender, instance, created, **kwargs):
     if created:
-        Account.objects.create(user=instance)
+        Account.objects.create(mainuser=instance, name=instance.username)
