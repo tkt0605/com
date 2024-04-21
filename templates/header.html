@@ -54,14 +54,6 @@
                             </button>
                         </a>
                     </li>
-                    {% elif room.mainuser != user %}
-                    <li style="color: rgb(241, 240, 240);">
-                        <a href="http://xlink.com/profile-create/" class="side_name">
-                            <button   id="nemu_button"  onMouseOver="changeColor1()" onMouseOut="revertColor1()"class="border_1">
-                                <b><div class="accounts">{{user.username}}</div></b>
-                            </button>
-                        </a>
-                    </li>
                     {% endif %}
                     {% endfor%}
                     <li style="color: rgb(241, 240, 240);">

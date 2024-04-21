@@ -16,7 +16,7 @@ class AccountForm(forms.ModelForm):
 	class Meta:
 		model = Account
 		fields = ('__all__')
-		exclude=['mainuser', 'name']
+		exclude=['mainuser', 'name', 'image', 'icon', 'infomation', 'hobby', 'detail']
 		widgets = {
             'infomation': forms.Textarea(
                 attrs={'placeholder': 'ユーザーの自己紹介'}
@@ -24,6 +24,7 @@ class AccountForm(forms.ModelForm):
 			'explain': forms.Textarea(
                 attrs={'placeholder': 'ユーザーの基本情報'}
             ),
+
         }
 	def __init__(self,mainuser=None,name=None , *args, **kwargs):
 		self.mainuser = mainuser

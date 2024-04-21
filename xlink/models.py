@@ -7,6 +7,8 @@ from django.conf import settings
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse, reverse_lazy
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 User = get_user_model()
 # from accounts.models import User
 class Category(models.Model):
@@ -15,33 +17,35 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 class Account(models.Model):
-    HOBBIES ={
-        ('・・・・', '・・・・'),
-        ('読書', '読書'),
-        ('ゲーム', 'ゲーム'),
-        ('映画', '映画'),
-        ('TV', 'TV'),
-        ('運動', '運動'),
-        ('PC', 'PC'),
-        ('VR/AR', 'VR/AR'),
-        ('プログラミング', 'プログラミング')
-    }
-    DETAILS = {
-        ('・・・・', '・・・・'),
-        ('小学生', '小学生'),
-        ('中学生', '中学生'),
-        ('高校生', '高校生'),
-        ('大学生', '大学生'),
-        ('社会人', '社会人'),
-    }
+    # HOBBIES ={
+    #     ('・・・・', '・・・・'),
+    #     ('読書', '読書'),
+    #     ('ゲーム', 'ゲーム'),
+    #     ('映画', '映画'),
+    #     ('TV', 'TV'),
+    #     ('運動', '運動'),
+    #     ('PC', 'PC'),
+    #     ('VR/AR', 'VR/AR'),
+    #     ('プログラミング', 'プログラミング')
+    # }
+    # DETAILS = {
+    #     ('・・・・', '・・・・'),
+    #     ('小学生', '小学生'),
+    #     ('中学生', '中学生'),
+    #     ('高校生', '高校生'),
+    #     ('大学生', '大学生'),
+    #     ('社会人', '社会人'),
+    # }
+    # choices=HOBBIES,
+    #choices=DETAILS,
     mainuser = models.ForeignKey(User,  on_delete=models.PROTECT, verbose_name="メインユーザー", blank=True, null=True, default="")
     # name = models.ForeignKey(User,on_delete=models.CASCADE, verbose_name='ユーザー名', blank=True, null=True)
     name = models.CharField(max_length=15, verbose_name='ユーザー名', blank=True, null=True, default="")
-    image = models.ImageField(upload_to='backimage/', verbose_name="バックイメージ",blank=True, null=True, default="media/defult/defultback.jpg/")
-    icon = models.ImageField(upload_to='icon/', verbose_name="アイコン", blank=True, null=True, default="media/defult/5770f01a32c3c53e90ecda61483ccb08.jpg/")
+    image = models.ImageField(upload_to='image/', verbose_name="バックイメージ", default='image/sample.jpg')
+    icon = models.ImageField(upload_to='icon/', verbose_name="アイコン",  default='icon/5770f01a32c3c53e90ecda61483ccb08.jpg')
     infomation = models.TextField(max_length=180, verbose_name="紹介文",blank=True, null=True, default="・・・・")
-    hobby =  models.CharField(max_length=8, choices=HOBBIES, default="・・・・")
-    detail = models.CharField(max_length=8, choices=DETAILS, default="・・・・")
+    hobby =  models.CharField(max_length=8, default="・・・・")
+    detail = models.CharField(max_length=8, default="・・・・")
     created_at = models.DateTimeField(auto_now_add=True,null=True  ,verbose_name='作成日')
     def __str__(self):
         return str(self.name)
@@ -52,7 +56,7 @@ class Group(models.Model):
     mainuser = models.ForeignKey(User,  on_delete=models.PROTECT, verbose_name="メインユーザー", blank=True, null=True)
     managername = models.ForeignKey(Account, null=True,on_delete=models.CASCADE,verbose_name="管理者")
     name = models.CharField(max_length=30, blank=True, null=True, verbose_name="Class名")
-    category = models.ForeignKey(Category, verbose_name="ジャンル", on_delete=models.PROTECT)
+    category = models.ForeignKey(Category, verbose_name="ジャンル", on_delete=models.PROTECT, default="・・・・", blank=True, null=True,)
     web_site = models.URLField(blank=True)
     backimage = models.ImageField(upload_to='backimage/', verbose_name="BackImage")
     icon = models.ImageField(upload_to='classicon/', verbose_name="クラスアイコン", null=True)

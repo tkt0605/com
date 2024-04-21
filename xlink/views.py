@@ -27,7 +27,7 @@ def rooms(request):
     }
     return HttpResponse(template.render(context, request))
 def accounts(request):
-    accounts = Account.objects.order_by("-created_at")[:100000]
+    accounts = Group.objects.order_by("-created_at")[:100000]
     rooms = Account.objects.order_by("-name")[:100000]
     template = loader.get_template("home.html")
     context = {
@@ -129,7 +129,7 @@ def communitys(request):
     }
     return HttpResponse(template.render(context, request))
 def community(request, name):
-    current_user = request.GET.user
+    current_user=request.GET.get("user")
     logged_in_user = request.user.username
     groups = Group.objects.order_by("-created_at")[:100000]
     rooms = Account.objects.order_by("-created_at")[:100000]
@@ -261,7 +261,9 @@ def return_comment(request, pk):
     return HttpResponse(template.render(context, request))
 class CreateAccountView(generic.CreateView):
     form_class = AccountForm
-    template_name = "account.html"
+    # template_name = "account.html"
+    template_name = 'account.html'
+    success_url = "/"
     def get_form_kwargs(self, *args, **kwargs):
         xlink_obj = super().get_form_kwargs(*args, **kwargs)
         form = AccountForm(self.request.POST, instance=User)

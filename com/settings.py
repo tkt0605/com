@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'widget_tweaks',
     'crispy_forms',
+    # 'xlink.apps.XlinkConfig',
     # 'psycopg2',
 ]
 

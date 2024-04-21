@@ -1,0 +1,233 @@
+.home_post_bord{
+    position: relative;
+    font-size: 20px;
+    border:solid 2px rgb(0,0,0);;
+    border-radius: 10px;
+    background: white;
+    margin-left: 130px;
+    top: -305px;
+    width: 510px;
+    height: 620px;
+}
+  .comment2{
+      position: relative;
+      font-size: 15px;
+      margin-left: 50px;
+      margin-right: 60px;
+  }
+  .post_form{
+      position: absolute;
+      margin-left: 120px;
+      border-radius: 10px;
+      top: -470px;
+      height: 180px;
+      width: 530px;
+      border:solid 2px rgb(197, 197, 197);
+      border-top:none;
+      background:rgb(255, 255, 255);
+  } 
+  .icon{
+      margin-top: 10px;
+  }
+  .div-bord{
+      position: relative;
+      margin-left: 360px;
+      top: 437.5px;
+  }
+  .main_bord2{
+    background: rgb(241, 240, 240);;
+    z-index: 1;
+    margin: 0;
+    width: 300px;
+    height: 925px;
+    top: 100px;
+    left: 0px;
+    position: fixed;
+  }
+.main_bord{
+    top: -10px;
+    left: -100px;
+}
+  .post{
+    position: absolute;
+    text-align: center;
+    margin-left: 120px;
+    border-radius: 10px;
+    top: -515px;
+    height: 35px;
+    width: 530px;
+    border:solid 2px rgb(197, 197, 197);
+    border-top:none;
+    background:rgb(255, 255, 255);
+  }
+  .comment{
+    position: absolute;
+    border-radius: 10px;
+    height: 110px;
+    margin-left: 10px;
+    margin-top: 20px;
+    width: 440px;
+  }
+  .image_1{
+    position: relative;
+    margin-top: 20px;
+    margin-left: 10px;
+    width:  30px;       /* ※縦横を同値に */
+    height: 30px;       /* ※縦横を同値に */
+    border-radius: 50%;
+  }
+  .logout_button{
+    display: flex;  
+    font-size: 17.5px;
+    color: rgb(0, 102, 255);
+    text-decoration:none;
+  }
+  .head_menu{
+    font-size: 17.5px;
+
+  }
+  .srash{
+    font-size: 25px;
+    margin-top: -5px;
+  }
+  .username_button{
+    font-size: 15px;
+    color: black;
+    text-decoration: none;
+  }
+  .account_user{
+    font-size: 17.5px;
+    text-decoration:none;
+    color: black;
+} 
+.vroom{
+    position: absolute;
+    margin-top: -10px;
+    margin-left: 200px;
+}
+.picture{
+    position: absolute;
+    margin-top: -10px;
+    margin-left: 100px;
+}
+.account_name_bord{
+    text-decoration:none;
+    color: black;
+    margin-left: 10px;
+    font-size: 17.5px;
+    margin-top: -30px;
+}
+.panel2-group{
+    margin-top: -610px;
+}
+.BORDERS{
+  margin-top: -50px;
+}
+.class_bord1{
+    position: relative;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 20px 20px 20px 20px ;
+    width: 450px;
+    height: 285px;
+    border-top:none;
+    background:rgb(255,255,255);
+    margin-left: -50px;
+}
+.image_bord{
+    position: relative;
+    border-radius: 10px 10px 0px 0px;
+    width: 450px;
+    height: 210px;
+    object-fit: cover;
+    margin-left: -20px;
+    margin-top: -325px;
+    top: 232px;
+}
+.class_names{
+  color: black;
+    position: relative;
+    margin-left: 10px;
+    top: 110px;
+    font-size: 19px;
+}
+.managername{
+    position: relative;
+    margin-left:20px;
+    top:150px;
+}
+.class_explain{
+    position: relative;
+    margin-top:-60px;
+    top: 160px;
+    left: 20px;
+    font-size: 14px;
+}
+.class_bord{
+    top: -550px;
+    margin-left: 160px;
+}
+.tab2-planel2{
+    top: 0px;
+    margin-left: 300px;
+
+}
+.tab2-group{
+    position: fixed;
+    z-index: 1;
+    top: 0px; 
+    display: flex; 
+    width: 600px;
+    left: 475px;
+  }
+  .tab2{
+    margin-top: 10px; 
+    flex-grow: 1;
+    list-style:none;
+    width: auto;
+    text-align:center;
+    cursor:pointer;
+    margin-left:15px;
+  }
+  .tab2.is-active2{
+    width: auto; 
+    color:#ffffff; 
+    border-radius:10px;
+  }
+  .button_menu{
+    background: rgb(0, 0, 0);
+    color: rgb(0, 255, 42);
+    width: 100px;
+    height: auto;
+    border: #ffffff;
+  }
+  .tab2.is-active3 {
+    color: rgb(255, 255, 255);
+    width: auto; 
+    border-radius:10px;
+  }
+  .button_menu{
+    border-radius: 10px;
+    width: auto;
+    height: 40px;
+    color: (srgb red green blue); 
+  }
+  .panel2{
+    display: none;
+  }
+
+  .panel2.is-show2{
+    display:block;
+}
+.sdcsa{
+    margin-left: 25px;
+    font-size:20px;
+}
+.class_page{
+    margin-top: -10px;
+    margin-left: 35px;
+    margin-bottom: 10px;
+}
+.jcdbsjcb{
+    font-size: 30px;
+}
