@@ -143,3 +143,19 @@ class ReturnCommentForm(forms.ModelForm):
 				if commit==True:
 					kwargs.save()
 			return kwargs.user
+class ProfileEditForm(forms.ModelForm):
+	class Meta:
+		model = Account
+		exclude =["mainuser", "name"]
+	def __init__(self,mainuser=None, name=None, *args, **kwargs):
+		self.mainuser = mainuser
+		self.name = name
+		super().__init__(*args, **kwargs)
+	def save(self, commit=True):
+		kwargs = super(ProfileEditForm, self).save(commit=False)
+		if self.mainuser:
+			kwargs.mainuser = self.mainuser
+			kwargs.name = self.name
+			if commit == True:
+				kwargs.save()
+		return kwargs.name 

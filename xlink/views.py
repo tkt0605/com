@@ -1,16 +1,20 @@
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
-from .forms import AccountForm, ClassCreateForm, CommentForm, ReturnCommentForm
 from django.contrib import messages
+from .forms import AccountForm, ClassCreateForm, CommentForm, ReturnCommentForm, ProfileEditForm
 from django.contrib.auth import login
 from .models import Account, Group, Comment, Category, FollowCount, CommentCount, ReturnComment, Root, FollowersCount, AccountRoot
 from django.views import generic
-from django.views.generic import ListView
+from django.views.generic import ListView, UpdateView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+from django.urls import reverse, reverse_lazy
 User = get_user_model()
 def index(request):
     template = loader.get_template('index.html')
@@ -68,7 +72,8 @@ def comments(request):
     }
     return HttpResponse(tempalte.render(context,request))
 def room(request, name):
-    name = Account.objects.get(name=name)
+    name = get_object_or_404(Account, name=name)
+    # name = Account.objects.get(name=name)
     groups = Group.objects.filter(managername=name)
     accounts=Account.objects.order_by("-created_at")[:100000]
     comments=Comment.objects.order_by("-created_at")[:100000]
@@ -310,3 +315,15 @@ class CreateReturnCommentView(generic.CreateView):
         kwargs["user"] = Account.objects.get(name = form.instance.user)
         return kwargs
 form_return = CreateReturnCommentView.as_view()
+class ProfileEditView(generic.UpdateView):
+    model = Account
+    form_class = ProfileEditForm
+    template_name = "profile_edit.html"
+    success_url = "/"
+    def get_form_kwargs(self, *args, **kwargs):
+        kwargs = super().get_form_kwargs(*args, **kwargs)
+        form = ProfileEditForm(self.request.POST, instance=Account)
+        kwargs["mainuser"] = self.request.GET.get("user")
+        kwargs["name"] = self.request.user.username
+        return kwargs
+form_edit=ProfileEditView.as_view()

@@ -30,7 +30,7 @@
                         </button>
                         <div class="headline"> 
                             <b class="x">X.</b><b class="linkS">LiNK</b>
-                            </div>
+                        </div>
                     </div>
                 </h1>
             </div>
@@ -48,6 +48,7 @@
                     {% if user == room.mainuser%}
                     <li style="color: rgb(241, 240, 240);">
                         <a class="side_name" href="/account/{{room.name}}/">
+                            {% comment %} <a class="side_name" href="/account/{{user.id}}/"> {% endcomment %}
                             <button   id="nemu_button"  onMouseOver="changeColor1()" onMouseOut="revertColor1()"class="border_1">
                                 <img class="image1_bord" src="/media/{{room.icon}}" alt="">
                                 <b><div class="account">{{room.name}}</div></b>

@@ -4,6 +4,7 @@ from django.urls import path, re_path, include
 from xlink import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import ProfileEditView
 urlpatterns = [
     path('accounts/', views.index, name="index"),
     path("", views.accounts, name="home"),
@@ -15,9 +16,10 @@ urlpatterns = [
     path('community/comment/<str:name>/', views.form_comment, name="comment"),
     path('compose/recomments/<int:pk>/<str:name>/', views.form_return, name="form_return"),
     path('follow_count', views.follow_count, name="follow_count"),
-    path('root_selecter', views.root_selecter, name="root_selecter"),
+    path('root_selecter', views.root_selecter, name="root_select"),
     path('follow_count', views.follow_count, name="follow_counts"),
     path('root_count', views.root_count, name="root_count"),
+    path("account/<slug:name>/edit/",ProfileEditView.as_view() , name="profile_edit")
 
 ]
 if settings.DEBUG:

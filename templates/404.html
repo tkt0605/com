@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block extra_head %}
+<link rel="stylesheet" href={% static 'css/404.css' %}>
+{% endblock extra_head %}
+{% block title %}XLiNK | 404Error{% endblock %}
+{% block content %}
+<center>
+    <div class="main">
+        <span class="error_message">
+            <h2><b>Sorry 404 Error</b></h2>
+        </span>
+    </div>
+</center>
+{% endblock  %}
