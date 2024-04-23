@@ -159,3 +159,21 @@ class ProfileEditForm(forms.ModelForm):
 			if commit == True:
 				kwargs.save()
 		return kwargs.name
+class ClassEditForm(forms.ModelForm):
+	class Meta:
+		model = Group
+		exclude =["mainuser", "managername", "name"]
+	def __init__(self,mainuser=None, managername=None,name=None, *args, **kwargs):
+		self.mainuser = mainuser
+		self.managername = managername
+		self.name = name 
+		super().__init__(*args, **kwargs)
+	def save(self, commit=True):
+		kwargs = super(ClassEditForm, self).save(commit=False)
+		if self.name:
+			kwargs.name = self.name
+			kwargs.mainuser = self.mainuser
+			kwargs.managername = self.managername
+			if commit == True:
+				kwargs.save()
+		return kwargs.name

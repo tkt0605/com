@@ -6,7 +6,7 @@ from django.template import loader
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-from .forms import AccountForm, ClassCreateForm, CommentForm, ReturnCommentForm, ProfileEditForm
+from .forms import AccountForm, ClassCreateForm, CommentForm, ReturnCommentForm, ProfileEditForm, ClassEditForm
 from django.contrib.auth import login
 from .models import Account, Group, Comment, Category, FollowCount, CommentCount, ReturnComment, Root, FollowersCount, AccountRoot
 from django.views import generic
@@ -141,7 +141,8 @@ def community(request, name):
     comments = Comment.objects.order_by("-created_at")[:10000]
     return_comments = ReturnComment.objects.order_by("-created_at")[:10000]
     manages = Group.objects.filter(mainuser=request.user)
-    name = Group.objects.get(name=name)
+    # name = Group.objects.get(name=name)
+    name = get_object_or_404(Group, name=name)
     user_followers = len(FollowersCount.objects.filter(user=name))
     user_following = len(FollowersCount.objects.filter(follower=current_user))
     user_comments = len(CommentCount.objects.filter(classname=name))
@@ -330,3 +331,19 @@ class ProfileEditView(UpdateView):
         kwargs["name"] = self.request.user.username
         return kwargs
 form_edit=ProfileEditView.as_view()
+class ClassEditView(UpdateView):
+    model = Group
+    form_class = ClassEditForm
+    template_name = "class_edit.html"
+    def get_object(self, queryset=None):
+        """ Custom get_object method if needed, otherwise it's handled by UpdateView """
+        name = self.kwargs.get('slug')
+        return get_object_or_404(Group, name=name)
+    def get_form_kwargs(self, *args, **kwargs):
+        kwargs = super().get_form_kwargs(*args, **kwargs)
+        form = ClassEditForm(self.request.POST, instance=Group)
+        kwargs["mainuser"] = self.request.user
+        kwargs["managername"] = self.request.user.username
+        kwargs["name"] = Group.objects.get(name=form.instance.name)
+        return kwargs
+form_class_edit = ClassEditView.as_view()

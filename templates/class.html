@@ -19,6 +19,11 @@
                             <img src="/media/{{community.icon}}" class="class_icon"/>
                             <b><span class="community_name">{{community.name}}</span></b>
                             <hr class="hr_class_name">
+                            {% if community.mainuser == user %}
+                            <form id="follow_button" action="edit/" method="post">
+                                <a href="/community/{{community}}/edit/"><button type="submit" class="follow"><b>クラスを編集</b></button></a>
+                            </form>
+                            {% else %}
                             <form id="follow_button" action="/follow_count" method="post">
                                 {% csrf_token %}
                                 <input type="hidden" name="user" value="{{community}}"readonly/>
@@ -36,6 +41,7 @@
                                 </div>
                                 {% endif %}
                             </form>
+                            {% endif %}
                             {% if community.mainuser == user %}
                             <div class="dsch"></div>
                             {% else %}
