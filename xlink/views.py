@@ -72,8 +72,8 @@ def comments(request):
     }
     return HttpResponse(tempalte.render(context,request))
 def room(request, name):
-    name = get_object_or_404(Account, name=name)
-    # name = Account.objects.get(name=name)
+    # name = get_object_or_404(Account, name=name)
+    name = Account.objects.get(name=name)
     groups = Group.objects.filter(managername=name)
     accounts=Account.objects.order_by("-created_at")[:100000]
     comments=Comment.objects.order_by("-created_at")[:100000]
@@ -315,15 +315,18 @@ class CreateReturnCommentView(generic.CreateView):
         kwargs["user"] = Account.objects.get(name = form.instance.user)
         return kwargs
 form_return = CreateReturnCommentView.as_view()
-class ProfileEditView(generic.UpdateView):
+class ProfileEditView(UpdateView):
     model = Account
     form_class = ProfileEditForm
     template_name = "profile_edit.html"
-    success_url = "/"
+    def get_object(self, queryset=None):
+        """ Custom get_object method if needed, otherwise it's handled by UpdateView """
+        name = self.kwargs.get('slug')
+        return get_object_or_404(Account, name=name)
     def get_form_kwargs(self, *args, **kwargs):
         kwargs = super().get_form_kwargs(*args, **kwargs)
         form = ProfileEditForm(self.request.POST, instance=Account)
-        kwargs["mainuser"] = self.request.GET.get("user")
+        kwargs["mainuser"] = self.request.user
         kwargs["name"] = self.request.user.username
         return kwargs
 form_edit=ProfileEditView.as_view()

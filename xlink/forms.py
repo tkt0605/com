@@ -153,9 +153,9 @@ class ProfileEditForm(forms.ModelForm):
 		super().__init__(*args, **kwargs)
 	def save(self, commit=True):
 		kwargs = super(ProfileEditForm, self).save(commit=False)
-		if self.mainuser:
+		if self.name:
 			kwargs.mainuser = self.mainuser
 			kwargs.name = self.name
 			if commit == True:
 				kwargs.save()
-		return kwargs.name 
+		return kwargs.name

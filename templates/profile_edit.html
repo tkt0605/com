@@ -33,7 +33,7 @@
                 <div class="reg_form">
                     <form class="forms"   enctype="multipart/form-data" method="post">
                         {% csrf_token %}
-                        {{ form.as_p }}
+                        {{ form }}
                         <button class="create" type="submit"><b>決定</b></button>
                     </form>
                 </div>

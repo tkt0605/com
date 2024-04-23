@@ -19,7 +19,7 @@ urlpatterns = [
     path('root_selecter', views.root_selecter, name="root_select"),
     path('follow_count', views.follow_count, name="follow_counts"),
     path('root_count', views.root_count, name="root_count"),
-    path("account/<slug:name>/edit/",ProfileEditView.as_view() , name="profile_edit")
+    path("account/<slug:slug>/edit/", views.form_edit , name="profile_edit")
 
 ]
 if settings.DEBUG:
