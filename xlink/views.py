@@ -331,19 +331,41 @@ class ProfileEditView(UpdateView):
         kwargs["name"] = self.request.user.username
         return kwargs
 form_edit=ProfileEditView.as_view()
+# class ClassEditView(UpdateView):
+#     model = Group
+#     form_class = ClassEditForm
+#     template_name = "class_edit.html"
+#     def get_object(self, queryset=None):
+#         """ Custom get_object method if needed, otherwise it's handled by UpdateView """
+#         name = self.kwargs.get('slug')
+#         return get_object_or_404(Group, name=name)
+#     def get_form_kwargs(self, *args, **kwargs):
+#         kwargs = super().get_form_kwargs(*args, **kwargs)
+#         form = ClassEditForm(self.request.POST, instance=Group)
+#         form.instance.name = self.kwargs["name"]
+#         kwargs["mainuser"] = self.request.user
+#         kwargs["managername"] = self.request.user.username
+#         kwargs["name"] = Group.objects.get(name=form.instance.name)
+#         return kwargs
+# form_class_edit = ClassEditView.as_view()
 class ClassEditView(UpdateView):
     model = Group
     form_class = ClassEditForm
     template_name = "class_edit.html"
     def get_object(self, queryset=None):
-        """ Custom get_object method if needed, otherwise it's handled by UpdateView """
-        name = self.kwargs.get('slug')
+        """カスタム get_object メソッド"""
+        name = self.kwargs.get("slug")
         return get_object_or_404(Group, name=name)
+    def get_success_url(self):
+        return reverse('xlink:community')
     def get_form_kwargs(self, *args, **kwargs):
         kwargs = super().get_form_kwargs(*args, **kwargs)
-        form = ClassEditForm(self.request.POST, instance=Group)
+        form = ClassEditForm(self.request.POST, instance=Group and Account)
+        # form.instance.name = self.kwargs.get("managername")
+        # kwargs['name'] = self.get_object()
         kwargs["mainuser"] = self.request.user
-        kwargs["managername"] = self.request.user.username
-        kwargs["name"] = Group.objects.get(name=form.instance.name)
+        kwargs["name"] = self.kwargs.get("name")
+        kwargs["managername"] = self.kwargs.get("managername")
         return kwargs
+
 form_class_edit = ClassEditView.as_view()
